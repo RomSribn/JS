@@ -1,0 +1,13 @@
+*{
+	font-family: 'Open Sans', sans-serif;
+}
+body{
+	background-color: #202020;
+}
+
+.left_nav{
+	float:left;
+}
+.right_content{
+	float:right;
+}
