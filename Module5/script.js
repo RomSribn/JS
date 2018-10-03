@@ -48,13 +48,13 @@ const log = txt => console.log(txt);
 
 
 // function setGuestState(users, period){
-// 	let res = users.map(arr=>({
-// 		...arr,
-// 		isActive: arr.inactiveDays < period
-// 	}));
-// 	return res;
+//  let res = users.map(arr=>({
+//    ...arr,
+//    isActive: arr.inactiveDays < period
+//  }));
+//  return res;
  
-// 	}
+//  }
 
 
 
@@ -90,8 +90,8 @@ const log = txt => console.log(txt);
 // ];
 
 // function getActiveGuests(array){
-// 	let res = array.filter(elem => elem.isActive);
-// 	return res
+//  let res = array.filter(elem => elem.isActive);
+//  return res
 // }
 
 // // Вызовы функции для проверки
@@ -118,8 +118,8 @@ const log = txt => console.log(txt);
 
 // function getGuestsOlderThan(guests, age){
 
-// 	let res = guests.filter(elem => elem.age > age);
-// 	return res
+//  let res = guests.filter(elem => elem.age > age);
+//  return res
 // }
 
 
@@ -150,8 +150,8 @@ const log = txt => console.log(txt);
 
 // function getGuestById(guests, id){
 
-// 	let res = guests.find(elem => elem.id === id)
-// 	return res
+//  let res = guests.find(elem => elem.id === id)
+//  return res
 // }
 
 // // Вызовы функции для проверки
@@ -217,17 +217,17 @@ const log = txt => console.log(txt);
 // };
 // // let totalPrice = 0;
 // // function getTotalPrice(products, order){
-	
-// // 	for(let item in order){
-// // 		totalPrice += order[item] * products[item]
-// // 	}
-// // 	return totalPrice
+  
+// //   for(let item in order){
+// //     totalPrice += order[item] * products[item]
+// //   }
+// //   return totalPrice
 // // }
 
 // function getTotalPrice(products, order){
-// 	const elem = Object.keys(order)
-// 	let res = elem.reduce((acc, val) => acc += products[val] * order[val] , 0 )
-// 	return res
+//  const elem = Object.keys(order)
+//  let res = elem.reduce((acc, val) => acc += products[val] * order[val] , 0 )
+//  return res
 // }
 
 
@@ -259,7 +259,7 @@ const log = txt => console.log(txt);
 // ];
 
 // function allGuestsActive(guests){
-// 	return guests.every(elem=> elem.isActive)
+//  return guests.every(elem=> elem.isActive)
 // }
 
 // // Вызовы функции для проверки
@@ -372,8 +372,8 @@ const log = txt => console.log(txt);
 //  * Получить массив имен (поле name) всех пользователей
 //  */
 // const getAllNames = arr => {
-// 	let res = arr.map(elem => elem.name);
-// 	return res
+//  let res = arr.map(elem => elem.name);
+//  return res
 // };
 
 // console.log(getAllNames(users)); 
@@ -384,8 +384,8 @@ const log = txt => console.log(txt);
 //  * Получить массив объектов пользователей по цвету глаз (поле eyeColor)
 //  */
 // const getUsersByEyeColor = (arr, color) => {
-// 	let res = arr.filter(elem => elem.eyeColor === color);
-// 	return res
+//  let res = arr.filter(elem => elem.eyeColor === color);
+//  return res
 // };
 
 // console.log(getUsersByEyeColor(users, 'blue')); // [объект Moore Hensley, объект Sharlene Bush, объект Carey Barr]
@@ -393,7 +393,7 @@ const log = txt => console.log(txt);
                                             
 // /**
 //  * Получить массив имен пользователей по полу (поле gender)
-//  */
+//  */Sort
 // const getUsersByGender = (arr, gender) => {
 //   let res;
 //  res = arr.map(elem =>{
@@ -483,6 +483,170 @@ const log = txt => console.log(txt);
 * повторяющихся скиллов и они должны быть отсортированы в алфавитном порядке
 */
 
+// const users = [
+//   {
+//     id: '701b29c3-b35d-4cf1-a5f6-8b12b29a5081',
+//     name: 'Moore Hensley',
+//     email: 'moorehensley@indexia.com',
+//     eyeColor: 'blue',
+//     phone: '+1 (848) 556-2344',
+//     friends: ['Sharron Pace'],
+//     isActive: false,
+//     balance: 2811,
+//     skills: ['ipsum', 'lorem'],
+//     gender: 'male',
+//     age: 37,
+//   },
+//   {
+//     id: '7a3cbd18-57a1-4534-8e12-1caad921bda1',
+//     name: 'Sharlene Bush',
+//     email: 'sharlenebush@tubesys.com',
+//     eyeColor: 'blue',
+//     phone: '+1 (855) 582-2464',
+//     friends: ['Briana Decker', 'Sharron Pace'],
+//     isActive: true,
+//     balance: 3821,
+//     skills: ['tempor', 'mollit', 'commodo', 'veniam', 'laborum'],
+//     gender: 'female',
+//     age: 34,
+//   },
+//   {
+//     id: '88beb2f3-e4c2-49f3-a0a0-ecf957a95af3',
+//     name: 'Ross Vazquez',
+//     email: 'rossvazquez@xinware.com',
+//     eyeColor: 'green',
+//     phone: '+1 (814) 593-3825',
+//     friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
+//     isActive: false,
+//     balance: 3793,
+//     skills: ['nulla', 'anim', 'proident', 'ipsum', 'elit'],
+//     gender: 'male',
+//     age: 24,
+//   },
+//   {
+//     id: '249b6175-5c30-44c6-b154-f120923736f5',
+//     name: 'Elma Head',
+//     email: 'elmahead@omatom.com',
+//     eyeColor: 'green',
+//     phone: '+1 (909) 547-2687',
+//     friends: ['Goldie Gentry', 'Aisha Tran'],
+//     isActive: true,
+//     balance: 2278,
+//     skills: ['adipisicing', 'irure', 'velit'],
+//     gender: 'female',
+//     age: 21,
+//   },
+//   {
+//     id: '334f8cb3-eb04-45e6-abf4-4935dd439b70',
+//     name: 'Carey Barr',
+//     email: 'careybarr@nurali.com',
+//     eyeColor: 'blue',
+//     phone: '+1 (956) 512-2693',
+//     friends: ['Jordan Sampson', 'Eddie Strong'],
+//     isActive: true,
+//     balance: 3951,
+//     skills: ['ex', 'culpa', 'nostrud'],
+//     gender: 'male',
+//     age: 27,
+//   },
+//   {
+//     guid: '150b00fb-dd82-427d-9faf-2879ea87c695',
+//     name: 'Blackburn Dotson',
+//     email: 'blackburndotson@furnigeer.com',
+//     eyeColor: 'brown',
+//     phone: '+1 (876) 411-2433',
+//     friends: ['Jacklyn Lucas', 'Linda Chapman'],
+//     isActive: false,
+//     balance: 1498,
+//     skills: ['non', 'amet', 'ipsum'],
+//     gender: 'male',
+//     age: 38,
+//   },
+//   {
+//     id: 'e1bf46ab-7168-491e-925e-f01e21394812',
+//     name: 'Sheree Anthony',
+//     email: 'shereeanthony@kog.com',
+//     eyeColor: 'brown',
+//     phone: '+1 (979) 504-2554',
+//     friends: ['Goldie Gentry', 'Briana Decker'],
+//     isActive: true,
+//     balance: 2764,
+//     skills: ['lorem', 'veniam', 'culpa'],
+//     gender: 'female',
+//     age: 39,
+//   },
+// ];
+
+// const getAllSkills = arr => {
+//  return [...new Set(
+//  arr
+//  .map(i => i.skills)
+//  .flat()
+//  .sort()
+//  )]
+// }
+//2 способ
+// function getAllSkills(arr){
+//  return arr
+//    .map(val=> val.skills)
+//    .flat()
+//    .reduce((acc, val)=>{
+//    if(!acc.includes(val)){
+//      acc.push(val);
+//    }
+//    return acc
+//  }, [])
+//    .sort()
+
+// }
+
+  
+
+// const getAllSkills = arr => {
+// return let res = arr
+//  .reduce((ac, i)=> [...ac, ...i.skills], [])
+//  .sort()
+//  .flat();
+//  [...new Set(res)]
+// };
+
+// const getAllSkills = arr => [...new Set()]
+// const getAllSkills = (array) => [...new Set(array.map(item => item.skills).flat())];
+// console.log(getAllSkills(users));
+// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+//================================== Сортировка массива по массиву
+         // let items = [
+//       ['Anne', 'a'],
+//       ['Bob', 'b'],
+//       ['Henry', 'c'],
+//       ['Andrey', 'd'],
+//       ['Jason', 'e'],
+//       ['Thomas', 'f']
+// ];
+
+// let sorting = ['e', 'f', 'c', 'd', 'b', 'a'];
+
+// let result = [];
+
+// sorting.forEach(key => {
+//   let found = false;
+//   items = items.filter(item => {
+//     if(!found && item[1] === key){
+//       result.push(item);
+//       found = true;
+//       return false;
+//     }
+//     return true;
+//   })
+// })
+
+
+// result.map(i => log(i[0]))
+
+                    
+/**
+* Массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
+*/
 const users = [
   {
     id: '701b29c3-b35d-4cf1-a5f6-8b12b29a5081',
@@ -577,49 +741,36 @@ const users = [
   },
 ];
 
-// const getAllSkills = arr => {
-// 	return [...new Set(
-// 	arr
-// 	.map(i => i.skills)
-// 	.flat()
-// 	.sort()
-// 	)]
-// }
+// const getUserNamesSortedByFriendsCount = arr => {
+//   let sorting = arr.map(i => i.friends.length);
+//   let items = arr.map(i => i.friends);
+//   let res = {};
 
-function getAllSkills(arr){
-	return arr
-		.map(val=> val.skills)
-		.flat()
-		.reduce((acc, val)=>{
-		if(!acc.includes(val)){
-			acc.push(val);
-		}
-		return acc
-	}, [])
-		.sort()
+//   sorting.forEach(key => {
+//     let found = false;
+//     items = items.filter(item => {
+//       if(!found && items[0] === key){
+//           result.push(items);
+//           found = true;
+//           return false;
+//       }
+//       return true
+//     })
+//   })
+  
+//   return res
 
-}
-
-	
-
-// const getAllSkills = arr => {
-// return let res = arr
-// 	.reduce((ac, i)=> [...ac, ...i.skills], [])
-// 	.sort()
-// 	.flat();
-//  [...new Set(res)]
 // };
 
-// const getAllSkills = arr => [...new Set()]
-// const getAllSkills = (array) => [...new Set(array.map(item => item.skills).flat())];
-console.log(getAllSkills(users));
-// [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit', 'ex', 'ipsum', 'irure', 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla', 'proident', 'tempor', 'velit', 'veniam' ]
+const getUserNamesSortedByFriendsCount = arr => {
+  return arr
+        .sort((a, b) => a.friends.length - b.friends.length)
+        .map(i => i.name)
+      }
+console.log(getUserNamesSortedByFriendsCount(uses)); 
+// [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
 
-                             
-// /**
-// * Массив имен (поле name) людей, отсортированных в зависимости от количества их друзей (поле friends)
-// */
-// const getUserNamesSortedByFriendsCount = arr => {...};
+alert('Hi')
 
-// console.log(getUserNamesSortedByFriendsCount(users)); 
-// // [ 'Moore Hensley', 'Sharlene Bush', 'Elma Head', 'Carey Barr', 'Blackburn Dotson', 'Sheree Anthony', 'Ross Vazquez' ]
+
+
