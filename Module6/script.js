@@ -159,19 +159,19 @@ let log = txt => console.log(txt);
   Создайте класс Car с указанными полями и методами.
 */
 
-class Car {
-  constructor(maxSpeed) {
-    /*
-      Добавьте свойства:
-        - speed - для отслеживания текущей скорости, изначально 0.
+//  class Car {
+// //   constructor(maxSpeed) {
+//     /*
+//       Добавьте свойства:
+//         - speed - для отслеживания текущей скорости, изначально 0.
         
-        - maxSpeed - для хранения максимальной скорости 
+//         - maxSpeed - для хранения максимальной скорости 
         
-        - running - для отслеживания заведен ли автомобиль, 
-          возможные значения true или false. Изначально false.
+//         - running - для отслеживания заведен ли автомобиль, 
+//           возможные значения true или false. Изначально false.
           
-        - distance - содержит общий киллометраж, изначально с 0
-    */
+//         - distance - содержит общий киллометраж, изначально с 0
+//     */
 
 //     this.speed = 0;
 //     this.maxSpeed = maxSpeed;
@@ -273,11 +273,21 @@ class Car {
 class Car {
   constructor(maxSpeed, value) {
     // ... код
-    this._value = value;
+    this.maxSpeed = maxSpeed;
+    this.value = value;
   }
   // ... код
+  get value(){
+    return this._value
+  }
+  set value(value){
+    this._value = value;
+  }
 }
 
+const bmv = new Car(50, 2000);
+bmv.value = 4000;
+log(bmv)
 
 
 
