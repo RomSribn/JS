@@ -289,6 +289,21 @@ let log = txt => console.log(txt);
 // bmv.value = 4000;
 // log(bmv)
 
+//===========HOME WORK===============
+class Student {constructor (){}}
+
+
+
+  
+// log(typeof Student === 'object')
+ 
+// log(typeof Student === function)
+ 
+// log(typeof Student === object)
+ 
+log(typeof Student === 'function')
+
+
 
 
 
