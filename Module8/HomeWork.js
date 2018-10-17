@@ -1,2 +1,2 @@
-"use strict"
-const log = txt => console.log(txt);
+// "use strict"
+// const log = txt => console.log(txt);
