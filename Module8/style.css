@@ -1,44 +1,27 @@
 body {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: 'Roboto', sans-serif;
 }
 
-.question-form {
+.inputs {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 16px;
+  outline: 2px solid teal;
 }
-
-.options {
-  display: flex;
-  flex-direction: column;
+.error{ 
+  border-color: red !important; 
 }
-
-.options label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-bottom: 16px;
-  font-size: 24px;
-}
-
-.options input {
-  margin: 0;
-  margin-right: 8px;
-  width: 24px;
-  height: 24px;
-}
-
-.btn {
-  font-size: 24px;
-  padding: 4px 32px;
-  cursor: pointer;
-}
-
-.result {
+.inputs input {
+  padding: 4px;
   font-size: 32px;
+  margin-bottom: 8px;
+  font-family: inherit;
+
 }
+
+
+

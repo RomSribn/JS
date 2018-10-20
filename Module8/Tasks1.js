@@ -95,18 +95,69 @@ const log = txt => console.log(txt);
 //   }
 // }
 
-let form = document.querySelector('form'),
-	submit = document.querySelector('button'),
-	result = document.querySelector('.result'),
-	val = null
-form.onclick = function(e){
-	let target = e.target;
-	if(target.tagName == 'INPUT') val =  target.value;
-}
+// let form = document.querySelector('form'),
+// 	submit = document.querySelector('button'),
+// 	result = document.querySelector('.result'),
+// 	val = null
+// form.onclick = function(e){
+// 	let target = e.target;
+// 	if(target.tagName == 'INPUT') val =  target.value;
+// }
 
-submit.onclick = function(){
-result.innerHTML = val
-}
+// submit.onclick = function(){
+// result.innerHTML = val
+// }
+//===============================================
+
+// /*
+//   Дан ul, а внутри него произвольное количество li с текстом и кнопкой. 
+//   Сделайте так, чтобы по нажатию на кнопку, удалялся тот li в котором
+//   она находится. Используйте делегирование.
+// */
+
+// const list = document.querySelector('.list');
+
+// list.addEventListener('click', handleClick);
+
+// function handleClick(evt){
+//   const nodeName = evt.target.nodeName;
+//   if(nodeName === 'BUTTON'){
+//     let parentNode = evt.target.parentNode;
+//     return parentNode.remove()
+//   }
+// }
+
+/*
+  Дан набор инпутов. Сделайте так, чтобы при потере фокуса все 
+  инпуты проверяли свое содержимое на правильное количество символов. 
+  
+  Сколько символов должно быть в инпуте, указывается в атрибуте data-length. 
+  Если введено подходящее количество, то outline инпута становится зеленым, 
+  если неправильное - красным. 
+*/
+const input = document.querySelectorAll('.inputs>input');
+
+[].forEach.call(input, function(el){
+    el.addEventListener('blur', handleBlur);
+    el.addEventListener('focus', handleFocus);
+})
+
+function handleBlur(event) {
+  const target = event.target;
+  if(target.nodeName === 'INPUT'){
+     if (target.value.length > target.getAttribute('data-length')) { 
+    // показать ошибку
+    target.className = "error";
+  }
+  }
+ };
+
+ function handleFocus(event){
+    const target = event.target;
+    if(target.className === 'error'){
+      target.className = ""
+    }
+ }
 
 
 
