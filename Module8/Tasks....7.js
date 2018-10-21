@@ -145,11 +145,12 @@ const input = document.querySelectorAll('.inputs>input');
 function handleBlur(event) {
   const target = event.target;
   if(target.nodeName === 'INPUT'){
-     if (target.value.length > target.getAttribute('data-length')) { 
+     if (target.value.length > target.getAttribute('data-length') || target.value === '') { 
     // показать ошибку
     target.className = "error";
+  }else {target.className = "good";}
   }
-  }
+  log(target.getAttribute('data-length'));
  };
 
  function handleFocus(event){
