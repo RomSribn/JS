@@ -35,8 +35,13 @@ const timer = {
 let minutes = 0;
 let seconds = 0;
 let mseconds = 0;
+
+let minutesCounterId;
+let secondCounterId;
+let msecondsCounterId;
+
 const minutesCounter = ()=> {
-  setInterval(()=>{
+   minutesCounterId = setInterval(()=>{
   minutes += 1;
   if(minutes >= 60){
     minutes = 0;
@@ -44,8 +49,9 @@ const minutesCounter = ()=> {
     clockface.textContent = `${minutes}:${seconds}.${mseconds}`;
 
 }, 10000);}
+
 const secondCounter = ()=> {
-  setInterval(()=>{
+   secondCounterId = setInterval(()=>{
   seconds += 1;
   if(seconds >= 60){
     seconds = 0;
@@ -54,7 +60,7 @@ const secondCounter = ()=> {
 }, 1000);}
 
 const msecondsCounter = ()=> {
-  setInterval(()=>{
+   msecondsCounterId = setInterval(()=>{
   mseconds += 1;
   if(mseconds >= 10){
     mseconds = 0;
@@ -89,44 +95,17 @@ function handleChangeColor(evt){
 }
 function handleStop(evt){
 
+  clearInterval(minutesCounterId);
+  clearInterval(secondCounterId);
+  clearInterval(msecondsCounterId);
+
   minutes = 0;
   seconds = 0;
   mseconds = 0;
-  clearInterval(minutesCounter);
-  clearInterval(secondCounter);
-  clearInterval(msecondsCounter);
+
+
   clockface.textContent = `${minutes}:${seconds}.${mseconds}`;
 }
-
-/*
-* Вспомогательные функци
-*/
-
-
-/*
-* Обновляет поле счетчика новым значением при вызове
-* аргумент time это кол-во миллисекунд
-*/
-// function updateClockface(elem, time) {
-//   // Используйте функцию getFormattedTime из задания #1
-//   // elem.textContent = getFormattedTime(time);
-// }
-
-/*
-* Подсветка активной кнопки
-*/
-// function setActiveBtn(evt) {
-//   const target = evt.target;
-//   log(target)
-//   if(target.classList.contains('active')) {
-//     return;
-//   }
-  
-//   startBtn.classList.remove('active');
-//   stopBtn.classList.remove('active');
-  
-//   target.classList.add('active');
-// }
 
 
 
