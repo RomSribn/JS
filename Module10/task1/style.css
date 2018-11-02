@@ -1,0 +1,43 @@
+* {
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
+}
+
+.list {
+  position         : absolute;
+  top              : 0;
+  left             : 0;
+  bottom           : 0;
+  z-index          : 1;
+  width            : 300px;
+  background-color : #fff;
+  transition       : .2s;
+}
+
+.list_closed {
+  transform: translateX(-100%);
+}
+
+.list__item {
+  margin           : 0.5rem 0;
+  padding          : 1rem 2rem;
+  background-color : pink;
+  border-right     : 10px solid transparent;
+  color            : #ffffff;
+  transition       : .2s;
+  cursor           : pointer;
+}
+
+.list__item_back {
+  border-left: 10px solid #6557d1;
+  border-right: none;
+}
+
+.list__item:hover {
+  opacity: .8;
+}
+
+.list__item_has-sub {
+  border-right: 10px solid #6557d1;
+}
