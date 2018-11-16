@@ -1,103 +1,53 @@
 "use strict"
 const log = txt => console.log(txt);
 //======================================================================
-
-
-
-let menuWrapper   = document.getElementById('menu');
-let menuStructure = [
-    {
-        text : 'menu-1',
-        sub  : [
-            {
-                text : 'submenu-1'
-            }, {
-                text : 'submenu-2',
-                sub  : [
-                    {
-                        text: 'double-sub-1'
-                    }, {
-                        text : 'double-sub-2',
-                        sub  : [
-                            {
-                                text: 'tripple-sub-1'
-                            }, {
-                                text: 'tripple-sub-2'
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    }, {
-        text : 'menu-2',
-        sub  : [
-            {
-                text: 'double-sub-1'
-            }, {
-                text: 'double-sub-1'
-            }
-        ]
-    }
-];
-
-function createList(list, level = 0, parent) {
-    let listWrapper = document.createElement('div');
-    listWrapper.classList.add('list');
-
-    if (level !== 0) {
-        let backButton = createBackButton(listWrapper, parent);
-        listWrapper.appendChild(backButton);
-    }
-
-    list.forEach(item => {
-        let menuButton = createButton(item, listWrapper, level);
-        
-        listWrapper.appendChild(menuButton);
-    });
-
-    return listWrapper;
-}
-
-function createBackButton(currentList, parentList) {
-    let backWrapper = document.createElement('div');
-    backWrapper.classList.add('list__item');
-    backWrapper.classList.add('list__item_back');
-    backWrapper.innerText = '<- back';
-
-    backWrapper.addEventListener('click', () => {
-        currentList.classList.add('list_closed');
-        parentList.classList.remove('list_closed');
-    });
+/*
+  Написать функцию fetchCountryData, которая использует
+  apiUrl + текущее значение input для составления запроса.
+  
+  Формат полного url таков:
+    https://restcountries.eu/rest/v2/name/имя-страны
     
-    currentList.classList.add('list_closed');
+  С помощью fetch сделать запрос по составленому 
+  адресу. Обязательно обработать вариант с ошибкой запроса
+  используя catch. 
+  
+  Результат запроса вывести в поле result в формате:
+    Country name: имя страны
+    Capital: столица
+    Main currency: название денежной единицы
+    Flag: флаг страны
+  
+  Все необходимые данные есть в ответе от API.
+  
+  PS: при отправке формы перезагружается страница,
+  решите эту задачу вспомнив о том, как остановить
+  поведение по умолчанию.
+*/
 
-    return backWrapper;
+const input = document.querySelector("input");
+const submitBtn = document.querySelector(".js-submit");
+const result = document.querySelector(".js-result");
+const apiUrl = "https://restcountries.eu/rest/v2/name/";
+
+submitBtn.addEventListener("click", fetchCountryData);
+
+/*
+  @param {FormEvent} evt
+*/
+function fetchCountryData(evt) {
+  
 }
 
-function createButton(itemData, currentList, level) {
-    let itemWrapper = document.createElement('div');
-    itemWrapper.id  = getRandomId();
-    itemWrapper.classList.add('list__item');
-    itemWrapper.innerText = itemData.text;
+fetch(apiUrl, 
+    .then(response => {
+        if(response.ok) return log(response.json());
+    }))
 
-    if (itemData.sub) {
-        itemWrapper.classList.add('list__item_has-sub');
-        let subMenu = createList(itemData.sub, ++level, itemWrapper);
-        
-        currentList.appendChild(subMenu);
 
-        itemWrapper.addEventListener('click', () => {
-            subMenu.classList.remove('list_closed');
-        })
-    }
 
-    return itemWrapper;
-}
 
-function getRandomId() {
-    return Math.random().toString(36).substr(2);
-}
 
-let root = createList(menuStructure);
-menuWrapper.appendChild(root);
+
+
+
