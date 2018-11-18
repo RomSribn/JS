@@ -9,14 +9,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #768d9ec2;
 }
 
 .timer {
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
-  color: #212121;
-  border-radius: 2px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 36px 27px rgb(255, 255, 255);
+    color: #212121;
+    border-radius: 27px;
+    background-color: #fff;
 }
 
 .clockface {
