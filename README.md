@@ -1,4 +1,4 @@
-# JS course in GOIT (JavaScript)
+#                                         JS course in GOIT (JavaScript)
 
 #  Materials include: 
        // basic knowledge in JS ( arrays, events, scopes etc.)
