@@ -2,187 +2,116 @@
 const log = txt => console.log(txt);
 //==================================================================================
 /*
-  Создайте скрипт секундомера.  
-  По ссылке можно посмотреть пример выбрав Stopwatch http://www.online-stopwatch.com/full-screen-stopwatch/
+  Написать приложение для работы с REST сервисом, 
+  все функции делают запрос и возвращают Promise 
+  с которым потом можно работать. 
   
-  Изначально в HTML есть разметка:
+  Реализовать следующий функционал:
+  - функция getAllUsers() - должна вернуть текущий список всех пользователей в БД.
   
-  <div class="stopwatch">
-    <p class="time js-time">00:00.0</p>
-    <button class="btn js-start">Start</button>
-    <button class="btn js-take-lap">Lap</button>
-    <button class="btn js-reset">Reset</button>
-  </div>
-  <ul class="laps js-laps"></ul>
+  - функция getUserById(id) - должна вернуть пользователя с переданным id.
   
-  Добавьте следующий функционал:
+  - функция addUser(name, age) - должна записывать в БД юзера с полями name и age.
   
-  - При нажатии на кнопку button.js-start, запускается таймер, который считает время 
-    со старта и до текущего момента времени, обновляя содержимое элемента p.js-time 
-    новым значение времени в формате xx:xx.x (минуты:секунды.сотни_миллисекунд).
-       
-    🔔 Подсказка: так как необходимо отображать только сотни миллисекунд, интервал
-                  достаточно повторять не чаще чем 1 раз в 100 мс.
-    
-  - Когда секундомер запущен, текст кнопки button.js-start меняется на 'Pause', 
-    а функционал при клике превращается в оставновку секундомера без сброса 
-    значений времени.
-    
-    🔔 Подсказка: вам понадобится буль который описывает состояние таймера активен/неактивен.
+  - функция removeUser(id) - должна удалять из БД юзера по указанному id.
   
-  - Если секундомер находится в состоянии паузы, текст на кнопке button.js-start
-    меняется на 'Continue'. При следующем клике в нее, продолжается отсчет времени, 
-    а текст меняется на 'Pause'. То есть если во время нажатия 'Pause' прошло 6 секунд 
-    со старта, при нажатии 'Continue' 10 секунд спустя, секундомер продолжит отсчет времени 
-    с 6 секунд, а не с 16. 
-    
-    🔔 Подсказка: сохраните время секундомера на момент паузы и используйте его 
-                  при рассчете текущего времени после возобновления таймера отнимая
-                  это значение от времени запуска таймера.
-    
-  - Если секундомер находится в активном состоянии или в состоянии паузы, кнопка 
-    button.js-reset должна быть активна (на нее можно кликнуть), в противном случае
-    disabled. Функционал при клике - остановка таймера и сброс всех полей в исходное состояние.
-    
-  - Функционал кнопки button.js-take-lap при клике - сохранение текущего времени секундомера 
-    в массив и добавление в ul.js-laps нового li с сохраненным временем в формате xx:xx.x
+  - функция updateUser(id, user) - должна обновлять данные пользователя по id. 
+    user это объект с новыми полями name и age.
+  Документацию по бэкенду и пример использования прочитайте 
+  в документации https://github.com/trostinsky/users-api#users-api.
+  Сделать минимальный графический интерфейс в виде панели с полями и кнопками. 
+  А так же панелью для вывода результатов операций с бэкендом.
 */
 
-/*
-  ⚠️ ЗАДАНИЕ ПОВЫШЕННОЙ СЛОЖНОСТИ - ВЫПОЛНЯТЬ ПО ЖЕЛАНИЮ
-  
-  Выполните домашнее задание используя класс с полями и методами.
-  
-  На вход класс Stopwatch принимает только ссылку на DOM-узел в котором будет 
-  динамически создана вся разметка для секундомера.
-  
-  Должна быть возможность создать сколько угодно экземпляров секундоментов 
-  на странице и все они будут работать независимо.
-  
-  К примеру:
-  
-  new Stopwatch(parentA);
-  new Stopwatch(parentB);
-  new Stopwatch(parentC);
-  
-  Где parent* это существующий DOM-узел. 
-*/
-
-const clockface = document.querySelector(".js-clockface");
-const startBtn = document.querySelector(".js-timer-start");
-// const stopBtn = document.querySelector(".js-timer-stop");
-const resetBtn = document.querySelector('.js-timer-reset');
-
-const timer = {
-  startTime: null,
-  deltaTime: 0,
-  id: null,
-  startTime: 0,
-  isActive: false,
-  start(){
-    if(this.isActive) return;
-    this.isActive = true;
-    this.startTime = Date.now() - this.deltaTime;
-    this.id = setInterval(()=>{
-      const currentTime = Date.now();
-      this.deltaTime = currentTime - this.startTime;
-      updateClockface(this.deltaTime);
-      // formatTime(deltaTime)
-    }, 100)
-  },
-  pause(){
-      clearInterval(this.id);
-      this.isActive = false;
-      updateClockface(this.deltaTime);
-    },
-  reset(){
-    this.deltaTime = 0;
-    clearInterval(this.id);
-    this.isActive = false;
-    updateClockface(this.deltaTime);
-    },
-  setActiveBtn(evt) {
-    const target = evt.target;
-  if(target.classList.contains('active')) {
-    return;
-  }
-  
-  startBtn.classList.remove('active');
-  resetBtn.classList.remove('active');
-  
-  target.classList.add('active');
-}
+const user = {
+      name : 'AGATA',
+      age: 1000000
 };
 
-/*
-* Вспомогательные функции
-*/
 
-// startBtn.addEventListener('click', timer.start.bind(timer));
-// resetBtn.addEventListener('click', timer.reset.bind(timer));
+function getAllUsers(){
 
-startBtn.addEventListener('click', handleStartBtnClick);
-resetBtn.addEventListener('click', handleResetBtnClick);
+  fetch('https://test-users-api.herokuapp.com/users')
+  .then(response => {
+    if(response.ok) return response.json();
+    throw new Error('Error fetching data');
+  })
+  .then(data => log(data.data))
+  .catch(error => log('Error'))
+
+}
 
 
+function getUserById(ID){
+  fetch(`https://test-users-api.herokuapp.com/users/${ID}`)
+  .then(response => {
+    if(response.ok) return response.json();
+    throw new Error('Error fetching data');
+  })
+  .then(data => log(data.data))
+  .catch(error => log('Error'))
+}
 
-startBtn.addEventListener('click', timer.setActiveBtn.bind(timer));
-resetBtn.addEventListener('click', timer.setActiveBtn.bind(timer));
 
-function handleStartBtnClick(){
-  if(!timer.isActive){
-    timer.start();
-    this.textContent = 'Pause';
-  }else{
-    timer.pause();
-    this.textContent = 'Continue';
+// getUserById('5beda2d4a91df2001445aa70');
+
+function addUser(name, age){
+
+  fetch('https://test-users-api.herokuapp.com/users', {
+  method: 'POST',
+  body: JSON.stringify({ name: name, age: age}),
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   }
-}
-function handleResetBtnClick(){
-    timer.reset();
-    startBtn.textContent = 'Start';
-}
+})
+  .then(response => {
+    if(response.ok) return response.json();
+    throw new Error('Error fetching data');
+    
+  })
+  .catch(error => log('Error'))
 
-
-
-
-
-/*
-* Обновляет поле счетчика новым значением при вызове
-* аргумент time это кол-во миллисекунд
-*/
-function updateClockface(time) {
-  // Используйте функцию getFormattedTime из задания #1
-  // elem.textContent = getFormattedTime(time);
-  const formattedTime = formatTime(time);
-  clockface.textContent = formattedTime;
 }
 
-function formatTime(ms){
-  const date = new Date(ms);
+function removeUser(ID){
 
-  let minutes = date.getMinutes();
-  minutes = minutes < 10 ? `0${date.getMinutes()}` : minutes;
+  fetch(`https://test-users-api.herokuapp.com/users/${ID}`, {
+    method: "DELETE",
+}).then(() => console.log('success'))
+.catch(error => console.log('ERROR' + error));
 
-  let seconds = date.getSeconds();
-  seconds = seconds < 10 ? `0${date.getSeconds()}` : seconds;
-
-  let mseconds = String(date.getMilliseconds()).slice(0, 1);
-
-  return `${minutes}:${seconds}.${mseconds}`;
 }
 
-/*
-* Подсветка активной кнопки
-*/
+function updateUser(ID, user){
 
-function setActiveBtn(target) {
-  if(target.classList.contains('active')) {
-    return;
+   fetch('https://test-users-api.herokuapp.com/users', {
+  method: 'POST',
+  body: JSON.stringify(user),
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   }
-  
-  startBtn.classList.remove('active');
-  stopBtn.classList.remove('active');
-  
-  target.classList.add('active');
+})
+  .then(() => console.log('success'))
+  .catch(error => console.log('ERROR' + error));
 }
+
+// addUser('Ura', 23);
+// removeUser('5beda1fca91df2001445aa6a')
+updateUser('5bf40e8ade9d1500140d0b82', user)
+getAllUsers();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
