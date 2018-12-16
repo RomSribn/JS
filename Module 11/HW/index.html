@@ -1,23 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Module9</title>
-	<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Module11</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
-<div class="stopwatch">
-    <section class="timer">
-  <input class="inputPlace js-clockface" placeholder="Введите запрос" autofocus=""></input>
-  <div>
-  	<button class="timer-btn js-timer-start">Start</button>
-  <button class="timer-btn js-timer-reset">Reset</button>
+<body>
+
+<div class="container">
+  <form action="#" class="js-form form">
+      <div class="row">
+        <div class="col-md-4"><section>
+      <h2>Screen size</h2>
+      <ul>
+        <li><label><input type="checkbox" name="size" value="13"> 13"</label></li>
+        <li><label><input type="checkbox" name="size" value="15"> 15"</label></li>
+        <li><label><input type="checkbox" name="size" value="17"> 17"</label></li>
+      </ul>
+    </section></div>
+        <div class="col-md-4"> <section>
+      <h2>Color</h2>
+      <ul>
+        <li><label><input type="checkbox" name="color" value="white"> white</label></li>
+        <li><label><input type="checkbox" name="color" value="gray"> gray</label></li>
+        <li><label><input type="checkbox" name="color" value="black"> black</label></li>
+      </ul>
+    </section></div>
+        <div class="col-md-4"> <section>
+      <h2>Release date</h2>
+      <ul>
+        <li><label><input type="checkbox" name="release_date" value="2015"> 2015</label></li>
+        <li><label><input type="checkbox" name="release_date" value="2016"> 2016</label></li>
+        <li><label><input type="checkbox" name="release_date" value="2017"> 2017</label></li>
+      </ul>
+    </section></div>
+      </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    <button type="reset" class="btn btn-primary">Clear</button>
+  </form>
+</div>
+
+<div class="container mt-5">
+  <div class="row cardPlace">
+
+    <div class="col-md-3 mb-2 mr-2">
+      <div class="card p-1" style="width: 253px;">
+  <img class="card-img-top" src="http://demo.posthemes.com/pos_zadademo/images/placeholder.png" alt="Card image cap">
+  <div class="card-body">
+    <h5>Macbook Air White 13"</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="font-weight-light">28000 UAH</p>
   </div>
-  Result:
-  <div class="res"></div>
-</section>
-	<!-- <script src="HomeWork.js"></script> -->
-	<!-- <script src="task8.js"></script> -->
-	<script src="HW.js"></script>
+    </div>
+  </div>
+
+</div>
+	
+<template class="cardExample">
+  <div class="col-md-3 mb-2 mr-2">
+      <div class="card p-1">
+  <img class="card-img-top" src="{{img}}" alt="Card image cap">
+  <div class="card-body">
+    <h5>{{name}}</h5>
+    <p class="card-text">{{descr}}</p>
+    <p class="font-weight-light">{{price}} UAH</p>
+  </div>
+    </div>
+  </div>
+</template>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+<script src="HW.js"></script>
 	
 </body>
 </html>

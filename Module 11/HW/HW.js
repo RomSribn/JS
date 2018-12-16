@@ -2,112 +2,178 @@
 const log = txt => console.log(txt);
 //==================================================================================
 /*
-  Написать приложение для работы с REST сервисом, 
-  все функции делают запрос и возвращают Promise 
-  с которым потом можно работать. 
+  Реализуйте форму фильтра товаров в каталоге и список отфильтрованных товаров.
+  Используйте шаблонизацию для создания карточек товаров.
   
-  Реализовать следующий функционал:
-  - функция getAllUsers() - должна вернуть текущий список всех пользователей в БД.
+  Есть массив объектов (дальше в задании), каждый из которых описывает 
+  ноутбук с определенными характеристиками.
   
-  - функция getUserById(id) - должна вернуть пользователя с переданным id.
+  Поля объекта по которым необходимо производить фильтрацию: size, color, release_date.
+  Поля объекта для отображения в карточке: name, img, descr, color, price, release_date.
+    
+  Изначально есть форма с 3-мя секциями, состоящими из заголовка и группы 
+  чекбоксов (разметка дальше в задании). После того как пользователь выбрал 
+  какие либо чекбоксы и нажал кнопку Filter, необходимо собрать значения чекбоксов по группам. 
   
-  - функция addUser(name, age) - должна записывать в БД юзера с полями name и age.
+  🔔 Подсказка: составьте объект формата
+      const filter = { size: [], color: [], release_date: [] }
+    
+  После чего выберите из массива только те объекты, которые подходят 
+  под выбраные пользователем критерии и отрендерите список карточек товаров.
   
-  - функция removeUser(id) - должна удалять из БД юзера по указанному id.
-  
-  - функция updateUser(id, user) - должна обновлять данные пользователя по id. 
-    user это объект с новыми полями name и age.
-  Документацию по бэкенду и пример использования прочитайте 
-  в документации https://github.com/trostinsky/users-api#users-api.
-  Сделать минимальный графический интерфейс в виде панели с полями и кнопками. 
-  А так же панелью для вывода результатов операций с бэкендом.
+  🔔 Каждый раз когда пользователь фильтрует товары, список карточек товаров очищается, 
+      после чего в нем рендерятся новые карточки товаров, соответствующих текущим критериям фильтра.
 */
 
-const user = {
-      name : 'AGATA',
-      age: 1000000
-};
+const container = document.querySelector('.cardPlace');
+const source = document.querySelector('.cardExample').innerHTML.trim();
+const template = Handlebars.compile(source);
+const laptops = [
+  {
+    size: 13,
+    color: 'white',
+    price: 28000,
+    release_date: 2015,
+    name: 'Macbook Air White 13"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 13,
+    color: 'gray',
+    price: 32000,
+    release_date: 2016,
+    name: 'Macbook Air Gray 13"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 13,
+    color: 'black',
+    price: 35000,
+    release_date: 2017,
+    name: 'Macbook Air Black 13"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 15,
+    color: 'white',
+    price: 45000,
+    release_date: 2015,
+    name: 'Macbook Air White 15"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 15,
+    color: 'gray',
+    price: 55000,
+    release_date: 2016,
+    name: 'Macbook Pro Gray 15"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 15,
+    color: 'black',
+    price: 45000,
+    release_date: 2017,
+    name: 'Macbook Pro Black 15"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 17,
+    color: 'white',
+    price: 65000,
+    release_date: 2015,
+    name: 'Macbook Air White 17"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 17,
+    color: 'gray',
+    price: 75000,
+    release_date: 2016,
+    name: 'Macbook Pro Gray 17"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+  {
+    size: 17,
+    color: 'black',
+    price: 80000,
+    release_date: 2017,
+    name: 'Macbook Pro Black 17"',
+    img: 'http://demo.posthemes.com/pos_zadademo/images/placeholder.png',
+    descr:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, beatae.',
+  },
+];
+
+let markup = laptops.reduce((acc, item) => acc + template(item),'');
+container.innerHTML = markup;
+
+const form = document.querySelector('.js-form');
+// log(form)
+const btnSubmit = document.querySelector('.btnSubmit');
+const btnReset = document.querySelector('.btnReset');
+// let filtered = {
+//   size: [],
+//   color: [],
+//   release_date: []
+// }
 
 
-function getAllUsers(){
+form.addEventListener('submit', handleFilter);
+form.addEventListener('reset', handleReset);
 
-  fetch('https://test-users-api.herokuapp.com/users')
-  .then(response => {
-    if(response.ok) return response.json();
-    throw new Error('Error fetching data');
+function getFormData(form){
+
+  const xhr = new XMLHttpRequest();
+    // POST to httpbin which returns the POST data as JSON
+    xhr.open('POST', 'https://httpbin.org/post', /* async = */ false);
+
+    const formData = new FormData(form);
+    xhr.send(formData);
+    return JSON.parse(xhr.response).form
+}
+
+function handleFilter(event){
+  event.preventDefault();
+  const filtered = getFormData(event.target)
+  log(filtered)
+  let markup;
+  // (item.size === +filtered.size) || (item.color === filtered.color) || (item.release_date === +filtered.release_date)
+  markup = laptops.filter(item => {
+    if(filtered.size){
+      filtered.size.forEach(i => item.size === +i);
+    }
+    if(filtered.color){
+      filtered.color.forEach(i => item.color === i);
+    }
+    if(filtered.release_date){
+      filtered.release_date.forEach(i => item.release_date === +i.release_date)
+    }
   })
-  .then(data => log(data.data))
-  .catch(error => log('Error'))
 
+  log(markup)
+  container.innerHTML = markup.reduce((acc, item) => acc + template(item),'')
 }
 
-
-function getUserById(ID){
-  fetch(`https://test-users-api.herokuapp.com/users/${ID}`)
-  .then(response => {
-    if(response.ok) return response.json();
-    throw new Error('Error fetching data');
-  })
-  .then(data => log(data.data))
-  .catch(error => log('Error'))
+function handleReset(){
+  container.innerHTML = '';
 }
-
-
-// getUserById('5beda2d4a91df2001445aa70');
-
-function addUser(name, age){
-
-  fetch('https://test-users-api.herokuapp.com/users', {
-  method: 'POST',
-  body: JSON.stringify({ name: name, age: age}),
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  }
-})
-  .then(response => {
-    if(response.ok) return response.json();
-    throw new Error('Error fetching data');
-    
-  })
-  .catch(error => log('Error'))
-
-}
-
-function removeUser(ID){
-
-  fetch(`https://test-users-api.herokuapp.com/users/${ID}`, {
-    method: "DELETE",
-}).then(() => console.log('success'))
-.catch(error => console.log('ERROR' + error));
-
-}
-
-function updateUser(ID, user){
-
-   fetch('https://test-users-api.herokuapp.com/users', {
-  method: 'POST',
-  body: JSON.stringify(user),
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  }
-})
-  .then(() => console.log('success'))
-  .catch(error => console.log('ERROR' + error));
-}
-
-// addUser('Ura', 23);
-// removeUser('5beda1fca91df2001445aa6a')
-updateUser('5bf40e8ade9d1500140d0b82', user)
-getAllUsers();
-
-
-
-
-
-
-
 
 
 
