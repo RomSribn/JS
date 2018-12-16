@@ -2,19 +2,35 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Module9</title>
+	<title>Module11</title>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css'>
+	
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<section class="timer">
-  <p class="clockface js-clockface">00:00.0</p>
-  <button class="timer-btn js-timer-start">Start</button>
-  <button class="timer-btn js-timer-stop">Pause</button>
-  <button class="timer-btn js-timer-reset">Reset</button>
-</section>
-	<!-- <script src="HomeWork.js"></script> -->
-	<!-- <script src="task8.js"></script> -->
-	<script src="task2.js"></script>
+	<div class="container">
+  <div class="row">
+    <form acrion="#" class="col s12 mainForm">
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="First name" id="first_name" name="first name" type="text" class="validate">
+          <label for="first_name"></label>
+        </div>
+        <div class="input-field col s12">
+          <input placeholder="Last Name" id="last_name" name="last name" type="text" class="validate">
+          <label for="last_name"></label>
+        </div>
+        <div class="col s12">
+          <button class="btn waves-effect waves-light" id="submit-btn" type="submit" name="action">submit</button>
+        </div>
+      </div>
+    </form>
+    <ul class="results col s12">
+    </ul>
+  </div>
+</div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="task3.js"></script>
 	
 </body>
 </html>
