@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Save yor links</h1>
+  <input type="text" placeholder="Give me link"/>
+  <input type="submit" />
+ 
+  <div class="card">
+  	<a href="https://www.google.com/"><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png" alt="google"></a> </br>
+  	<div class="title"><h1>Google</h1></div>
+  	<div class="description">
+  		Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for."
+  	</div>
+  </div>
+  </div>
+  <template class="cardTemplate">
+  	<div class="card">
+  	<a href="{{src-link}}"><img src="{{src-img-link}}" alt="{{src-alt-decr}}"></a> </br>
+  	<div class="title"><h1>{{src-alt-decr}}</h1></div>
+  	<div class="description">{{decription}}</div>
+  </div>
+  </template>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
