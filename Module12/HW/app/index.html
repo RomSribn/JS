@@ -9,26 +9,29 @@
 <body>
 
 <div class="container">
-  <h1>Save yor links</h1>
+	<div class="search">
+		<h1>Save yor links</h1>
   <input type="text" placeholder="Give me link"/>
   <input type="submit" />
- 
-  <div class="card">
-  	<a href="https://www.google.com/"><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png" alt="google"></a> </br>
-  	<div class="title"><h1>Google</h1></div>
-  	<div class="description">
-  		Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for."
-  	</div>
+	</div>
+  
+ <div class="cards">
+ 	
+ </div>
+  
+
   </div>
-  </div>
+
+
   <template class="cardTemplate">
   	<div class="card">
-  	<a href="{{src-link}}"><img src="{{src-img-link}}" alt="{{src-alt-decr}}"></a> </br>
-  	<div class="title"><h1>{{src-alt-decr}}</h1></div>
-  	<div class="description">{{decription}}</div>
+  	<a href="{{url}}"><img src="{{image}}" alt="{{title}}"></a> </br>
+  	<div class="title"><h1>{{title}}</h1></div>
+  	<div class="description">{{description}}</div>
   </div>
   </template>
-	<script src="js/main.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+		<script src="js/main.js"></script>
 
 </body>
 </html>

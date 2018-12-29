@@ -42,6 +42,7 @@ gulp.task('scripts', function() {
   return gulp.src('app/js/**/*.js')
   .pipe(concat('scripts.min.js'))
   .pipe(uglify()) // Mifify js (opt.)
+  .pipe(rename({ suffix: '.min', prefix : '' }))
   .pipe(gulp.dest('dist/js'))
   .pipe(browserSync.reload({ stream: true }))
 });
@@ -58,3 +59,10 @@ gulp.task('watch', function() {
     gulp.watch('app/*.html', gulp.parallel('code'))
   });
   gulp.task('default', gulp.parallel('watch', 'styles', 'scripts', 'browser-sync'));
+
+const Handlebars = require('handlebars');
+const source = document.querySelector('.cardTemplate').innerHTML.trim();
+
+const template = Handlebars.compile(source);
+
+
