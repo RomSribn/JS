@@ -45,6 +45,8 @@ const log = txt => console.log(txt);
 	const key = '5c265894d43f1d1580ffa62584e53c27d612d3cfaf289';
 // const Handlebars = require('handlebars');
 const cardMarkup = document.querySelector('.cards');
+const deleteBtn = document.querySelector('.btn');
+// console.log(deleteBtn);
 const forSearching = {
 	input: document.querySelector('input[type="text"]'),
 	submit: document.querySelector('input[type="submit"]')
@@ -63,6 +65,7 @@ const template = Handlebars.compile(source);
 let countStorage = 0;
 // log(template(sourceJSON))
 // cardMarkup.insertAdjacentHTML('afterbegin', template(sourceJSON))
+
 function isValidUrl(url)
 {
   var objRE = /(^https?:\/\/)?[a-z0-9~_\-\.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i;
@@ -81,27 +84,47 @@ function fetchAPI(link) {
 			.catch(err => log('АШИБКА',err))
 }
 
-// fetchAPI().then(data => log(data))
+
 
 forSearching.submit.addEventListener('click', handleInputLink);
-// localStorage.setItem('myCat', 'Tom');
+cardMarkup.addEventListener('click', handleDelete);
+
 function handleInputLink(){
+	console.log(forSearching.input.value);
 	if(!isValidUrl(forSearching.input.value)){
 		alert('Invalid url');
-
+		forSearching.input.value = '';
 		return
 	}
+	// if()
 	fetchAPI(forSearching.input.value).then(data => {
 		if(!data){
-			alert('Ничего не найдено((')
+			alert('Ничего не найдено((');
+			forSearching.input.value = '';
 			return
 		}
+		Object.values(localStorage).map(i => {
+			if(JSON.parse(i).url === data.url){
+				alert("Такое уже есть!");
+				forSearching.input.value = '';
+				return
+			}
+		});
 		countStorage += 1;
 		cardMarkup.insertAdjacentHTML('afterbegin', template(data))
 		console.log(data);
-		localStorage.setItem(forSearching.input.value, JSON.stringify(data));
+		localStorage.setItem(data.url, JSON.stringify(data));
 		forSearching.input.value = '';
 	})
+}
+
+
+function handleDelete(evt){
+	console.log(evt.target);
+	if(evt.target.className === "btn"){
+		localStorage.removeItem(evt.target.parentElement.parentElement.firstElementChild.href);
+		evt.target.parentElement.parentElement.remove()
+	}
 }
 
 // console.log(localStorage.getItem(1));

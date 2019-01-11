@@ -80,11 +80,18 @@ input[type="text"]:focus + input[type="submit"] {
 	max-height: 750px;
 
 }
+.btn{
+ background-color: #ff0000a3;
+ height: 50px;
+}
+.btn:hover{
+  background-color: #ff0000;
+}
 .card{
 	/*text-align: center;*/
-	display: flex;
+	/*display: flex;
 	justify-content: space-around;
-	flex-wrap: wrap;
+	flex-wrap: wrap;*/
 	margin-bottom: 20px;
 	border: 1px solid #ccc; 
 	border-radius: 16px;
@@ -100,6 +107,7 @@ input[type="text"]:focus + input[type="submit"] {
 .description:hover{
 	color: rgba(0, 0, 0, 0.70);}
 }
+
 * {
   box-sizing: border-box;
   &:before,
